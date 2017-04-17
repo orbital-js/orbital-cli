@@ -1,0 +1,25 @@
+{
+  "name": "@boat/cli",
+  "version": "1.0.0-alpha.0",
+  "description": "A simple CLI to start your Boat projects",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getcanal/boat-cli.git"
+  },
+  "keywords": [
+    "boat",
+    "canal",
+    "cli",
+    "node"
+  ],
+  "author": "Wilson Hobbs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/getcanal/boat-cli/issues"
+  },
+  "homepage": "https://github.com/getcanal/boat-cli#readme"
+}
