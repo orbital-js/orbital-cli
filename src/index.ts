@@ -7,6 +7,14 @@ program
     .version(require('../package.json').version);
 
 program
+    .option('-v, --version')
+    .action((args) => {
+        if (program.version) {
+            console.log(require('../package.json').version)
+        }
+    })
+
+program
     .command('start [dir]')
     .description('start a new Boat app')
     .action(start);
