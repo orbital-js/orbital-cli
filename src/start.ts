@@ -25,7 +25,7 @@ export function start(dir?: string) {
                 }
             },
             filter: function (input: string) {
-                let item = input.replace(' ', '');
+                let item = input.replace(' ', '-');
                 return item;
             }
         }]).then((answers) => {
