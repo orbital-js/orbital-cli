@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+'use strict';
+
+process.title = 'boat';
+process.on('unhandledRejection', r => console.error(r));
+
+var cli = require('../').exec;
