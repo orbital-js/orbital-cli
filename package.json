@@ -1,7 +1,7 @@
 {
-  "name": "@boat/cli",
+  "name": "@orbital/cli",
   "version": "1.0.0-alpha.2",
-  "description": "A simple CLI to start your Boat projects",
+  "description": "A simple CLI to start your Orbital projects",
   "bin": {
     "boat": "./bin/boat"
   },
@@ -23,9 +23,9 @@
   "author": "Wilson Hobbs",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/getcanal/boat-cli/issues"
+    "url": "https://github.com/orbital-js/orbital-cli/issues"
   },
-  "homepage": "https://github.com/getcanal/boat-cli#readme",
+  "homepage": "https://github.com/orbital-js/orbital-cli#readme",
   "dependencies": {
     "chalk": "^1.1.3",
     "commander": "^2.9.0",

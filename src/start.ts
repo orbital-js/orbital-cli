@@ -10,7 +10,7 @@ export function start(dir?: string) {
             if (!exists) {
                 install(dir);
             } else {
-                console.log(chalk.blue.red('Something already exists at that path.'));
+                console.error(chalk.red.red('Something already exists at that path.'));
                 process.exit(1);
             }
         })
@@ -36,8 +36,8 @@ export function start(dir?: string) {
 }
 
 function install(dir: string) {
-    console.log(chalk.blue.bold('Cloning into ' + dir));
+    console.info(chalk.blue.bold('Cloning into ' + dir));
     shell.exec('git clone https://github.com/getcanal/boat-starter.git ' + dir);
-    console.log(chalk.blue.bold('Running npm install'));
+    console.info(chalk.blue.bold('Installing dependencies from npm'));
     shell.exec('npm install');
 }

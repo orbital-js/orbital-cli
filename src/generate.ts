@@ -43,7 +43,6 @@ export function generate(type?: string, name?: string) {
 function replaceAll(orig: string, search: string, replacement: string) {
     var target = orig;
     let resp = target.split(search).join(replacement);
-    console.log(resp);
     return resp;
 };
 
@@ -62,13 +61,23 @@ function gen(type: string, name: string) {
         feature = replaceAll(feature, '$CAMEL_CASE', names.$CAMEL_CASE);
         feature = replaceAll(feature, '$HYPHEN_CASE', names.$HYPHEN_CASE);
 
-        let pt = path.join(process.cwd(), 'src/features/', names.$HYPHEN_CASE)
+        let pt = path.join(process.cwd(), 'src/features/', names.$HYPHEN_CASE);
+        let mod = path.join(process.cwd(), 'src/app.module.ts');
         if (!fs.existsSync(pt)) {
             fs.mkdirSync(pt);
             fs.writeFile(pt + '/' + names.$HYPHEN_CASE + '.controller.ts', controller);
             fs.writeFile(pt + '/' + names.$HYPHEN_CASE + '.feature.ts', feature);
+            fs.readFile(mod, 'utf-8', (err, file) => {
+                if (!err) {
+                    console.log(mod);
+                    file = file.replace('// FEATURES', `// FEATURES\nimport { ` + names.$CAMEL_CASE + `Feature } from './features/` + names.$HYPHEN_CASE + `/` + names.$HYPHEN_CASE + `.feature';`);
+                    file = file.replace('features: [', 'features: [\n        ' + names.$CAMEL_CASE + 'Feature,')
+                    console.log(file);
+                    fs.writeFile(mod, file, { encoding: 'utf-8' });
+                }
+            })
         } else {
-            console.log(chalk.red.bold('A feature with that name already exists.'));
+            console.error(chalk.red.bold('A feature with that name already exists.'));
             process.exit(1);
         }
     } else if (type == 'interface') {
@@ -86,7 +95,7 @@ function gen(type: string, name: string) {
         if (!fs.existsSync(pt + '/' + names.$HYPHEN_CASE + '.interface.ts')) {
             fs.writeFile(pt + '/' + names.$HYPHEN_CASE + '.interface.ts', intf);
         } else {
-            console.log(chalk.red.bold('An interface with that name already exists.'));
+            console.error(chalk.red.bold('An interface with that name already exists.'));
             process.exit(1);
         }
 
@@ -105,7 +114,7 @@ function gen(type: string, name: string) {
         if (!fs.existsSync(pt + '/' + names.$HYPHEN_CASE + '.class.ts')) {
             fs.writeFile(pt + '/' + names.$HYPHEN_CASE + '.class.ts', klass);
         } else {
-            console.log(chalk.red.bold('A class with that name already exists.'));
+            console.error(chalk.red.bold('A class with that name already exists.'));
             process.exit(1);
         }
 
@@ -124,9 +133,21 @@ function gen(type: string, name: string) {
         if (!fs.existsSync(pt + '/' + names.$HYPHEN_CASE + '.middleware.ts')) {
             fs.writeFile(pt + '/' + names.$HYPHEN_CASE + '.middleware.ts', middleware);
         } else {
-            console.log(chalk.red.bold('A middleware with that name already exists.'));
+            console.error(chalk.red.bold('A middleware with that name already exists.'));
             process.exit(1);
         }
+
+        let mod = path.join(process.cwd(), 'src/app.module.ts');
+        
+        fs.readFile(mod, 'utf-8', (err, file) => {
+            if (!err) {
+                console.log(mod);
+                file = file.replace('// MIDDLEWARES', `// MIDDLEWARES\nimport { ` + names.$CAMEL_CASE + ` } from './middlewares/` + names.$HYPHEN_CASE + `/` + names.$HYPHEN_CASE + `.middleware';`);
+                file = file.replace('middlewares: [', 'middlewares: [\n        ' + names.$CAMEL_CASE + 'Feature,')
+                console.log(file);
+                fs.writeFile(mod, file, { encoding: 'utf-8' });
+            }
+        })
 
         // } else if (type == 'module') {
 

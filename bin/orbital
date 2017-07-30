@@ -2,7 +2,7 @@
 
 'use strict';
 
-process.title = 'boat';
+process.title = 'orbital';
 process.on('unhandledRejection', r => console.error(r));
 
 var cli = require('../').exec;

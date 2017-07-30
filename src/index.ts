@@ -14,7 +14,7 @@ program
     .option('-v, --version')
     .action((args) => {
         if (program.version) {
-            console.log(require('../package.json').version)
+            console.info(require('../package.json').version)
         }
     })
 
